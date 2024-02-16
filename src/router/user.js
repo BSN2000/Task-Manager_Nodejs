@@ -21,11 +21,7 @@ route.post('/users',async (req,res)=>{
 
 route.get('/users',auth,async (req,res)=>{
 
-    // try{
-    //     return res.status(200).send(req.user)
-    // }catch(e){
-    //     res.status(400).send(e)
-    // }
+
     res.send(req.user)
 })
 
@@ -104,7 +100,7 @@ route.patch('/users/me',auth,async(req,res)=>{
 
 route.delete('/users/me',auth,async(req,res)=>{
     try {
-        // Instead of deleting the user, you can use `req.user.remove()` as you have done.
+
         await User.deleteOne({ _id: req.user._id })
         await Task.deleteMany({owner:req.user._id})
         res.status(200).send(req.user);
